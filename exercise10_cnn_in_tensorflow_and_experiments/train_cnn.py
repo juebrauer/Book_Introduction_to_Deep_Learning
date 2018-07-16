@@ -20,9 +20,6 @@
 #
 # Then let the script run.
 # The final trained model will be saved.
-#
-# ---
-# Prof. Dr. Juergen Brauer, www.juergenbrauer.org
 
 from dataset_reader import dataset
 import tensorflow as tf
@@ -44,6 +41,9 @@ import tensorflow as tf
 #          feature maps: 10
 
 exp_nr = 1
+dataset_root =\
+    "V:/01_job/12_datasets/imagenet/cars_vs_bikes_prepared/"
+
 
 # helper function to build 1st conv layer with filter size 11x11
 # and stride 4 (in both directions) and no padding
@@ -103,52 +103,72 @@ def build_cnn_model(_X, keep_prob, n_classes, imagesize, img_channel):
     if (exp_nr == 1 or exp_nr==2):
 
         # feature hierarchy:
-        # topology: INPUT->C1->P1->C2->P2->C3->C4->C5->P3->FC1->FC2->OUT
-        conv1 = conv1st('conv1', _X, _weights['wc1'], _biases['bc1'])
-        pool1 = max_pool('pool1', conv1, k=3, s=2)
-        conv2 = conv2d('conv2', pool1, _weights['wc2'], _biases['bc2'])
-        pool2 = max_pool('pool2', conv2, k=3, s=2)
-        conv3 = conv2d('conv3', pool2, _weights['wc3'], _biases['bc3'])
-        conv4 = conv2d('conv4', conv3, _weights['wc4'], _biases['bc4'])
-        conv5 = conv2d('conv5', conv4, _weights['wc5'], _biases['bc5'])
-        pool3 = max_pool('pool3', conv5, k=3, s=2)
+        # topology:
+        # INPUT->C1->P1->C2->P2->C3->C4->C5->P3->FC1->FC2->OUT
+        conv1 =\
+            conv1st('conv1', _X, _weights['wc1'], _biases['bc1'])
+        pool1 =\
+            max_pool('pool1', conv1, k=3, s=2)
+        conv2 =\
+            conv2d('conv2', pool1, _weights['wc2'], _biases['bc2'])
+        pool2 =\
+            max_pool('pool2', conv2, k=3, s=2)
+        conv3 =\
+            conv2d('conv3', pool2, _weights['wc3'], _biases['bc3'])
+        conv4 =\
+            conv2d('conv4', conv3, _weights['wc4'], _biases['bc4'])
+        conv5 =\
+            conv2d('conv5', conv4, _weights['wc5'], _biases['bc5'])
+        pool3 =\
+            max_pool('pool3', conv5, k=3, s=2)
 
         # classifier:
         # fully connected layers
-        dense1 = tf.reshape(pool3,
-                            [-1, _weights['wd1'].get_shape().as_list()[0]])
-        dense1 = tf.nn.relu(tf.matmul(dense1,
-                                      _weights['wd1']) + _biases['bd1'],
-                                      name='fc1')
-        dense2 = tf.nn.relu(tf.matmul(dense1,
-                                      _weights['wd2']) + _biases['bd2'],
-                                      name='fc2')
-        out = tf.matmul(dense2, _weights['out']) + _biases['out']
+        dense1 =\
+            tf.reshape(pool3,
+                       [-1, _weights['wd1'].get_shape().as_list()[0]])
+        dense1 =\
+            tf.nn.relu(tf.matmul(dense1,
+                       _weights['wd1']) + _biases['bd1'],
+                       name='fc1')
+        dense2 =\
+            tf.nn.relu(tf.matmul(dense1,
+                                 _weights['wd2']) + _biases['bd2'],
+                                 name='fc2')
+        out =\
+            tf.matmul(dense2, _weights['out']) + _biases['out']
 
     elif exp_nr == 3:
 
         # feature hierarchy:
-        # topology: INPUT->C1->P1->FC1->FC2->OUT
-        conv1 = conv1st('conv1', _X, _weights['wc1'], _biases['bc1'])
+        # topology:
+        # INPUT->C1->P1->FC1->FC2->OUT
+        conv1 =\
+            conv1st('conv1', _X, _weights['wc1'], _biases['bc1'])
         print("conv1 shape: ", conv1.get_shape())
-        pool1 = max_pool('pool1', conv1, k=3, s=2)
+        pool1 =\
+            max_pool('pool1', conv1, k=3, s=2)
         print("pool1 shape: ", pool1.get_shape())
 
         # classifier:
         # fully connected layers
-        dense1 = tf.reshape(pool1, [-1, 27*27*10])
-        dense1 = tf.nn.relu(
+        dense1 =\
+            tf.reshape(pool1, [-1, 27*27*10])
+        dense1 =\
+            tf.nn.relu(
                    tf.matmul(dense1,
                              _weights['exp3_wd1']) + _biases['bd1'],
                              name='fc1')
         print("dense1 shape: ", dense1.get_shape())
-        dense2 = tf.nn.relu(
+        dense2 =\
+            tf.nn.relu(
                    tf.matmul(dense1,
                              _weights['wd2']) + _biases['bd2'],
                              name='fc2')
         print("dense2 shape: ", dense2.get_shape())
 
-        out = tf.matmul(dense2, _weights['out']) + _biases['out']
+        out =\
+            tf.matmul(dense2, _weights['out']) + _biases['out']
         print("out shape: ", out.get_shape())
 
     return [out, _weights['wc1']]
@@ -156,8 +176,6 @@ def build_cnn_model(_X, keep_prob, n_classes, imagesize, img_channel):
 
 # 1. create a training and testing Dataset object that stores
 #    the training / testing images
-dataset_root =\
-    "V:/01_job/12_datasets/imagenet/cars_vs_bikes_prepared/"
 training = dataset(dataset_root + "train", ".jpeg")
 testing = dataset(dataset_root + "validation", ".jpeg")
 

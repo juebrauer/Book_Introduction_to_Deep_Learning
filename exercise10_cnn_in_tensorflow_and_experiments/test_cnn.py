@@ -8,9 +8,6 @@
 #    <dataset_root>/validation/bikes
 #    <dataset_root>/validation/cars
 
-# 
-# ---
-# Prof. Dr. Juergen Brauer, www.juergenbrauer.org
 
 from dataset_reader import dataset
 

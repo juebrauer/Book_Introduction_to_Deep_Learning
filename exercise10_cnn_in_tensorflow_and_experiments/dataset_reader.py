@@ -21,9 +21,6 @@
 # The code here is inspired by:
 # Wang Xinbo's AlexNet implementation:
 # see https://github.com/SidHard/tfAlexNet
-#
-# ---
-# Prof. Dr. Juergen Brauer, www.juergenbrauer.org
 
 
 import numpy as np
