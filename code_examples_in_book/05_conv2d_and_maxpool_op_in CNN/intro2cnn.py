@@ -16,8 +16,8 @@ def load_two_test_images():
 
     # oad two test images and
     # convert int values to float values in [0,1]
-    img0 = cv2.imread("test0.jpg")
-    img1 = cv2.imread("test1.jpg")
+    img0 = cv2.imread("test3.jpg")
+    img1 = cv2.imread("test3.jpg")
     #print("max value of img0 is", img0.max())
     img0 = img0.astype(np.float32)/255.0
     img1 = img1.astype(np.float32)/255.0
