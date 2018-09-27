@@ -20,13 +20,15 @@ INPUT_DIM = 2
 NR_NEURONS = 7*7
 LEARN_RATE = 0.2
 adapt_neighbors = False
+WAIT_FOR_KEYPRESS = True
 
 # visualization parameters
 HEIGHT = 600
 WIDTH  = 600
-COLOR_SAMPLE       = (128,128,128)
-COLOR_NEURON       = (0,0,255)
-COLOR_NEIGHBORHOOD = (0,128,255)
+COLOR_SAMPLE         = (128,128,128)
+COLOR_CURRENT_SAMPLE = (255,0,0)
+COLOR_NEURON         = (0,0,255)
+COLOR_NEIGHBORHOOD   = (0,128,255)
 RADIUS_SAMPLES = 5
 RADIUS_NEURONS = 5
 
@@ -63,7 +65,8 @@ print("There are ", nr_samples, "samples in the list.")
 
 # 2. generate a SOM
 my_som = som(INPUT_DIM, NR_NEURONS)
-my_som.initialize_neuron_weights_to_grid([100, 100, 200,200])
+my_som.initialize_neuron_weights_to_grid([10, 10, 150,150])
+
 
 
 # 3. SOM training
@@ -96,8 +99,12 @@ while (True):
         cv2.circle(img, sample_coord,
                    RADIUS_SAMPLES, COLOR_SAMPLE)
 
+    # 3.6 visualize position of current input sample
+    cv2.circle(img, tuple(vec),
+               RADIUS_SAMPLES, COLOR_CURRENT_SAMPLE, 3)
 
-    # 3.6 visualize positions of neurons
+
+    # 3.7 visualize positions of all neurons
     for i in range(NR_NEURONS):
 
         # get the neurons weight vector and
@@ -109,7 +116,7 @@ while (True):
                    RADIUS_NEURONS, COLOR_NEURON, 2)
 
 
-    # 3.7 visualize neighborhood relationship of neurons
+    # 3.8 visualize neighborhood relationship of neurons
     #    by drawing a line between each two neighbored
     #    neurons
     for i in range(NR_NEURONS):
@@ -137,24 +144,27 @@ while (True):
             cv2.line(img, neuron_i_coord, neuron_j_coord,
                      COLOR_NEIGHBORHOOD, 1)
 
-    # 3.8 show how many steps we have already trained
+    # 3.9 show how many steps we have already trained
     font = cv2.FONT_HERSHEY_SIMPLEX
     cv2.putText(img,
-                str(my_som.nr_steps_trained).zfill(4),
-                (WIDTH-50, 20), font, 0.5, (0,0,0), 1,
+                str(my_som.nr_steps_trained).zfill(5),
+                (WIDTH-60, 20), font, 0.5, (0,0,0), 1,
                 cv2.LINE_AA)
 
 
-    # 3.9 show visualization of samples, neuron locations
-    #    and neuron neighborhood relations
+    # 3.10 show visualization of samples, neuron locations
+    #      and neuron neighborhood relations
     cv2.imshow('img', img)
 
 
-    # 3.10 wait for a key
-    c = cv2.waitKey(1)
+    # 3.11 wait for a key
+    if WAIT_FOR_KEYPRESS:
+        c = cv2.waitKey(0)
+    else:
+        c = cv2.waitKey(1)
 
 
-    # 3.11 generate new sample distribution?
+    # 3.12 generate new sample distribution?
     #      interesting to see, how an existing SOM adapts
     #      to new input data!
     if c!=-1:
@@ -183,7 +193,9 @@ while (True):
             print("Adapt neighbors? --> ", adapt_neighbors )
 
 
-    # save image?
+    # 3.13 save current image?
+    #      e.g. for later animation of SOM adaption process
+    #      in a video or animated gif
     if False:
         if (my_som.nr_steps_trained == 1 or
             my_som.nr_steps_trained % 100 == 0):
