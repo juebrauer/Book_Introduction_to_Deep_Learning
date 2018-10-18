@@ -54,6 +54,10 @@ print("data type of d is : ", type(d))
 print("data type of e is : ", type(e))
 print("data type of f is : ", type(f))
 
+e.append(4444)
+e.append([55555])
+print("Updated list e is now : " + str(e))
+
 
 print("b)")
 b = 21
@@ -71,25 +75,25 @@ print(str(type(str(type(int(b)))))[3])
 #######################
 print("\n\nSelections")
 #######################
-#
+
 # while True:
-#     inp = input()
-#     try:
-#         inp = float(inp)
-#     except ValueError:
-#         if inp=="exit":
-#             break
-#         else:
-#             print("Invalid command!")
-#     else:
-#         if inp>=1 and inp<=3:
-#             print("A")
-#         elif inp>=4 and inp<=6:
-#             print("B")
-#         elif inp>=7 and inp<=9:
-#             print("C")
-#         else:
-#             print("Invalid number!")
+#  inp = input()
+#  try:
+#      inp = float(inp)
+#  except ValueError:
+#      if inp=="exit":
+#          break
+#      else:
+#          print("Invalid command!")
+#  else:
+#      if inp>=1 and inp<=3:
+#          print("A")
+#      elif inp>=4 and inp<=6:
+#          print("B")
+#      elif inp>=7 and inp<=9:
+#          print("C")
+#      else:
+#          print("Invalid number!")
 
 
 
@@ -152,12 +156,15 @@ class car:
 
     def set_speed(self, newspeed):
         self.speed = newspeed
+        if newspeed > self.maxspeed:
+            print("Speed "+ str(newspeed) + "? "
+                  "Come on! This is a '" + self.carname + "'!")
 
     def drive(self, hours):
         self.mileage = self.mileage + hours*self.speed
 
     def show_status(self):
-        print("car " + self.carname +
+        print("car '" + self.carname + "'"
               " currently drives with speed " + str(self.speed) +
               " and has mileage " + str(self.mileage))
 
@@ -172,6 +179,8 @@ c1.show_status()
 c2.set_speed(200)
 c2.drive(2)
 c2.show_status()
+
+c1.set_speed(200)
 
 
 print("b)")
