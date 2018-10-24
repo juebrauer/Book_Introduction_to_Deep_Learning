@@ -10,8 +10,8 @@ print("Your OpenCV version is: " + cv2.__version__)
 x = np.array([[1.0,2.0], [-3.0,-2.0]], dtype='float')
 
 
-#cap = cv2.VideoCapture('V:/01_job/12_datasets/test_videos/video_testpattern.mp4')
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('V:/01_job/12_datasets/test_videos/video_testpattern.mp4')
+#cap = cv2.VideoCapture(0)
 
 kernel = np.array([[-1, 0, 1],
                    [-1, 0, 1],
@@ -28,9 +28,9 @@ max_val = +255.0*3.0
 
 
 # Gaussfilter:
-kernel = np.ones(9*9).reshape(9,9)
-min_val = 0.0
-max_val = 81.0*255.0
+#kernel = np.ones(9*9).reshape(9,9)
+#min_val = 0.0
+#max_val = 81.0*255.0
 
 
 
@@ -56,7 +56,7 @@ while(cap.isOpened()):
 
     # resize grayscale image
     #gray = cv2.resize(gray,None,fx=1.75, fy=1.75, interpolation = cv2.INTER_CUBIC)
-    gray = cv2.resize(gray, None, fx=1.0, fy=1.0, interpolation=cv2.INTER_CUBIC)
+    #gray = cv2.resize(gray, None, fx=1.0, fy=1.0, interpolation=cv2.INTER_CUBIC)
 
     # convert from type uint8 to float32
     input_matrix = np.float32(gray)
@@ -89,7 +89,7 @@ while(cap.isOpened()):
     cv2.imshow('output_matrix', output_matrix)
 
     # wait for a key
-    c = cv2.waitKey(1)
+    c = cv2.waitKey(0)
 
     # 'q' pressed?
     if (c==113):

@@ -22,7 +22,7 @@ import numpy as np
 
 # how many steps to learn?
 NR_MNIST_IMAGES_TO_SHOW = 5
-NR_LEARN_STEPS = 1000
+NR_LEARN_STEPS = 3000
 LEARN_RATE = 0.01
 
 

@@ -197,5 +197,3 @@ class convertible(car):
 c3 = convertible("your convertible", 250, 5)
 c3.show_status()
 
-
-

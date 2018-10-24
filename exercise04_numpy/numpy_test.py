@@ -84,7 +84,8 @@ print("a7=",a7)
 ##################
 
 # a)
-A = np.array([1,2,3,4,5,6,7,8,9,10])
+#A = np.array([1,2,3,4,5,6,7,8,9,10])
+A = np.array([i for i in range(1,11)])
 print("A=",A)
 B = A.reshape(2,5)
 print("B=",B)
@@ -124,7 +125,7 @@ print("I=", I)
 
 # d)
 C = np.matmul(A,A_inv)
-#C = np.round(C)
+C = np.round(C)
 #C = C.astype(int)
 print("C=\n",C)
 I = np.eye(2,2)
@@ -146,7 +147,14 @@ print("rndA=\n",rndA)
 rndB = np.random.randint(low=-1, high=1, size=(5,3))
 print("rndB=\n",rndB)
 
-
+# c)
+mu = 5.0
+sigma = 1.0
+rndC = np.random.normal(mu,sigma,1000)
+print(rndC)
+import matplotlib.pyplot as plt
+plt.hist(rndC, 50)
+plt.show()
 
 
 

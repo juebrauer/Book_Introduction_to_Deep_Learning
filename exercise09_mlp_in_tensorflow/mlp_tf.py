@@ -29,15 +29,15 @@ NR_EPOCHS = 2000
 # for RELU transfer function use smaller learn rate
 # than for logistic transfer function
 # Also use more hidden neurons! (e.g. 2-30-12-2)
-LEARN_RATE = 0.001
+#LEARN_RATE = 0.001
 
 # for logistic transfer function
-#LEARN_RATE = 0.5
+LEARN_RATE = 0.5
 
 MINI_BATCH_SIZE = 100
 NR_NEURONS_INPUT   = 2
-NR_NEURONS_HIDDEN1 = 100 # nr of neurons in 1st hidden layer
-NR_NEURONS_HIDDEN2 = 50  # nr of neurons in 2nd hidden layer
+NR_NEURONS_HIDDEN1 = 50 # nr of neurons in 1st hidden layer
+NR_NEURONS_HIDDEN2 = 25  # nr of neurons in 2nd hidden layer
 NR_NEURONS_OUTPUT  = 2
 
 # store 2D weight matrices & 1D bias vectors for all
@@ -82,14 +82,14 @@ def multilayer_perceptron(x, weights, biases):
     # hidden layer #1 with RELU
     layer_1 = tf.add(tf.matmul(x, weights['h1']),
                      biases['b1'])
-    layer_1 = tf.nn.relu(layer_1)
-    #layer_1 = tf.nn.sigmoid(layer_1)
+    #layer_1 = tf.nn.relu(layer_1)
+    layer_1 = tf.nn.sigmoid(layer_1)
 
     # hidden layer #2 with RELU
     layer_2 = tf.add(tf.matmul(layer_1, weights['h2']),
                      biases['b2'])
-    layer_2 = tf.nn.relu(layer_2)
-    #layer_2 = tf.nn.sigmoid(layer_2)
+    #layer_2 = tf.nn.relu(layer_2)
+    layer_2 = tf.nn.sigmoid(layer_2)
 
     # output layer with linear activation (no RELUs!)
     out_layer = tf.matmul(layer_2, weights['out'])\
@@ -250,7 +250,7 @@ def build_TF_graph():
     # optimizer = tf.train.AdamOptimizer(learning_rate=learn_rate).minimize(cost)
 
 
-    use_opt_nr = 4
+    use_opt_nr = 5
 
     if use_opt_nr==1:
         optimizer =\

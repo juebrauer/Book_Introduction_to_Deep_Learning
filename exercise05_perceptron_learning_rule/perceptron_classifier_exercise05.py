@@ -246,7 +246,7 @@ def test_perceptron(weights, x_test, y_test):
 '''
 Here is a simple Nearest Neighbour classifier.
 Just store the training data as a database.
-If a new vector has to be classifier,
+If a new vector has to be classified,
 just look into the database and search for the most similar vector.
 Then take as the predicted class, the corresponding label of that vector.
 '''
@@ -334,7 +334,7 @@ def main():
     x_train,y_train,x_test,y_test = read_mnist_data()
 
     print("\n2. Show the data")
-    show_some_mnist_images(3, x_train, y_train)
+    show_some_mnist_images(5, x_train, y_train)
 
     print("\n3. Train Perceptron")
     weights = generate_and_train_perceptron_classifier(5000, x_train, y_train, x_test, y_test)
@@ -345,11 +345,11 @@ def main():
     print("correctly classified: ", nr_correct)
     print("wrongly classified: ", nr_wrong)
 
-    print("\n5. Comparison with own classifier")
-    correct_rate, nr_correct, nr_wrong = test_NN_classifier(x_train, y_train, x_test, y_test)
-    print(correct_rate * 100.0, "% of the test patterns were correctly classified.")
-    print("correctly classified: ", nr_correct)
-    print("wrongly classified: ", nr_wrong)
+    #print("\n5. Comparison with own classifier")
+    #correct_rate, nr_correct, nr_wrong = test_NN_classifier(x_train, y_train, x_test, y_test)
+    #print(correct_rate * 100.0, "% of the test patterns were correctly classified.")
+    #print("correctly classified: ", nr_correct)
+    #print("wrongly classified: ", nr_wrong)
 
     print("Program end.")
 

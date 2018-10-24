@@ -13,7 +13,7 @@ print '3 / 1   =', 3 / 1
 
 # Difference #2: raising exceptions
 # syntax for raising exceptions
-#raise IOError, "This is an error message"
+# raise IOError, "This is an error message"
 #raise IOError("This is an error message")
 
 
